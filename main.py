@@ -19,8 +19,8 @@ def all():
 @app.route('/create/', methods=['GET', 'POST'])
 def create():
     if request.method == 'GET':
-        return render_template('donations.jinja2')
-    elif request.method == 'POST':
+        return render_template('create.jinja2')
+    if request.method == 'POST':
         donor = Donor.select().where(Donor.name == request.form['name']).get()
         donation = Donation(donor=donor, value=float(request.form['value']))
         donation.save()
