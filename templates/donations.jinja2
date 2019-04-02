@@ -1,12 +1,23 @@
 {% extends 'base.jinja2' %}
 
-{% block subtitle %}Donations{% endblock subtitle %}
+{% block subtitle %}Donor Database{% endblock subtitle %}
 
 {% block content %}
+
+{# Comment: create button to go to create.jinja2 form #}
+<form action='/create/' method='GET' id='submit_button'>
+</form>
+<button type="submit" form="submit_button" value="Add Donation">Add Donation</button>
+
+<table border="1" cellspacing="0" cellpadding="2.5">
+<td><b>Name</b></td>
+<td><b>Amount</b></td>
+</tr>
 <ul>
     {% for donation in donations %}
-        <li><b>{{ donation.donor.name }}</b>: {{ "{:>25}".format("${:,.2f}").format(donation.value) }}</li>
+        <tr><td><b>{{ '{:<10}'.format(donation.donor.name) }}</b></td> <td>{{ '${:>75,.2f}'.format(donation.value) }}</td></tr>
     {% endfor %}
 </ul>
+</table>
 {% endblock content %}
 
