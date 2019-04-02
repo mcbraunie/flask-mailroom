@@ -22,6 +22,11 @@ def create():
         return render_template('create.jinja2')
 
     if request.method == 'POST':
+        # I tried adding a try/except block to check names being added but
+        # was not able to get it to work correctly as the name being checked
+        # always seemed to make it into the db first (causing IndexOutOfRange error)
+        # and there seemed to be no way that I could devise to check it/catch it
+        # before it caused problems
         donor = Donor.select().where(Donor.name == request.form['name']).get()
         donation = Donation(donor=donor, value=float(request.form['value']))
         donation.save()
